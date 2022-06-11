@@ -16,7 +16,7 @@ import java.util.UUID;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
-    public void placeOrder(OrderRequest orderRequest){
+    public String placeOrder(OrderRequest orderRequest){
         List<OrderLineItems> listOrderLineItems =orderRequest.getOrderLineItemsDTOS()
                 .stream()
                 .map(this::mapToOrderLineItems)
@@ -40,6 +40,7 @@ public class OrderService {
         }else{
             throw new IllegalArgumentException("Products are not all available in stock");
         }
+        return "order placed succ";
 
     }
 
